@@ -149,6 +149,7 @@ export interface ImagePickerProps {
   onCancel?: () => void
   selected?: Asset[]
   selectedAlbum?: Album
+  smartAlbums?: boolean
   onSelectAlbum?: (album: Album | undefined) => void
   limit?: number
   timeSlider?: boolean
@@ -926,7 +927,7 @@ export function ImagePicker(props: ImagePickerProps) {
   async function getAlbums() {
     const data: AlbumData[] = []
     const albums = await MediaLibrary.getAlbumsAsync({
-      includeSmartAlbums: true,
+      includeSmartAlbums: props.smartAlbums ?? true,
     })
     for (const album of albums) {
       const types: MediaLibrary.MediaTypeValue[] = []
